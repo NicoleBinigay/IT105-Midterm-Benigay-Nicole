@@ -1,7 +1,30 @@
-CREATE TABLE Students (
-    StudentID INT PRIMARY KEY AUTO_INCREMENT,
-    FirstName VARCHAR(100) NOT NULL,
-    LastName VARCHAR(100) NOT NULL,
-    Email VARCHAR(100) UNIQUE,
-    Course VARCHAR(50)
+CREATE DATABASE LibrarySystem;
+USE LibrarySystem;
+
+CREATE TABLE Authors (
+    AuthorID INT PRIMARY KEY AUTO_INCREMENT,
+    AuthorName VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Books (
+    BookID INT PRIMARY KEY AUTO_INCREMENT,
+    Title VARCHAR(150) NOT NULL,
+    AuthorID INT,
+    Genre VARCHAR(50),
+    FOREIGN KEY (AuthorID) REFERENCES Authors(AuthorID)
+);
+
+CREATE TABLE Borrowers (
+    BorrowerID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) UNIQUE
+);
+
+CREATE TABLE Loans (
+    LoanID INT PRIMARY KEY AUTO_INCREMENT,
+    BookID INT,
+    BorrowerID INT,
+    LoanDate DATE,
+    FOREIGN KEY (BookID) REFERENCES Books(BookID),
+    FOREIGN KEY (BorrowerID) REFERENCES Borrowers(BorrowerID)
 );
